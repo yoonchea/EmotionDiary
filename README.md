@@ -21,7 +21,7 @@
     - filter 구현(날짜 순, 감정 순, 새일기작성)
     - DiaryList 구현 (emotion, content, 수정하기 버튼)
 
-  ## 33단계 (2023. 02. 02)
+  ## 3단계 (2023. 02. 02)
     1. EDIT, DiaryPage 페이지구현
     2. utill 디렉토리 생성 후 날짜 생성 함수, 감정 객체 따로 배치(export, import)
     3. LocalStorage 로 데이터베이스 유지
