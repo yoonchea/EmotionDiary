@@ -20,3 +20,15 @@
     - 날짜 저장하는 state 생성
     - filter 구현(날짜 순, 감정 순, 새일기작성)
     - DiaryList 구현 (emotion, content, 수정하기 버튼)
+
+  ## 33단계 (2023. 02. 02)
+    1. EDIT, DiaryPage 페이지구현
+    2. utill 디렉토리 생성 후 날짜 생성 함수, 감정 객체 따로 배치(export, import)
+    3. LocalStorage 로 데이터베이스 유지
+      - Web Storage API(키/값)
+      - 객체로 저장시 JSON.stringify({}) => 문자열로 강제로 변환(직렬화)
+      - 객체를 불러올 시 숫자형으로 저장했다면 JSON.parse() => 문자열을 숫자로 변환
+      - reducer를 통해 localStorage에 저장
+    4. 최적화
+      - 필요 없이 렌더링 되는 부분 최적화
+      - React.memo 로 감싸기

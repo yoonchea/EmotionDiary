@@ -1,16 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React, { useReducer, useRef } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
 import './App.css';
 import Home from './pages/Home';
 import New from './pages/New';
 import Edit from './pages/Edit';
 import Diary from './pages/Diary';
-
-
-// Components
-// import MyButton from './components/MyButton';
-// import MyHeader from './components/MyHeader';
-// import RouteTest from './components/RouteTest';
 
 const reducer = (state, action) => {
   let newState = [];
@@ -27,60 +21,45 @@ const reducer = (state, action) => {
       break;
     }
     case 'EDIT': {
-      newState = state.map((it) => it.id === action.data.id ? {...action.data} : it)
+      newState = state.map((it) => it.id === action.data.id ? action.data : it)
       break;
     }
     default: return state;
   }
+  localStorage.setItem('diary', JSON.stringify(newState))
   return newState; 
 }
 
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
-const dummyData = [{
-  id: 1,
-  emotion: 1,
-  content: "더미데이터",
-  date: 1675237000105
-},
-{
-  id: 2,
-  emotion: 2,
-  content: "더미데이터2",
-  date: 1675237000106
-},
-{
-  id: 3,
-  emotion: 3,
-  content: "더미데이터3",
-  date: 1675237000107
-},
-{
-  id: 4,
-  emotion: 4,
-  content: "더미데이터4",
-  date: 1675237000108
-},
-{
-  id: 5,
-  emotion: 5,
-  content: "더미데이터5",
-  date: 1675237000109
-}]
 
 function App() {
 
-  const [data, dispatch] = useReducer(reducer, dummyData);;
+  useEffect(() => {
+    const localData = localStorage.getItem('diary');
+    if(localData) {
+      // 내림차순 정렬
+      const diaryList = JSON.parse(localData).sort((a, b) => parseInt(b.id) - parseInt(a.id));
+      // //내림차순 정렬
+      dataId.current = parseInt(diaryList[0].id) + 1
+
+      //초기값으로 설정해주는 action을 발생시켜야하므로 dispatch
+      dispatch({ type: "INIT", data: diaryList })
+      
+    }
+  },[])
+
+  const [data, dispatch] = useReducer(reducer, []);
 
   //CREATE
-  const dataId = useRef(0);
+  const dataId = useRef(0); 
   const onCreate = (date, content, emotion) => {
     dispatch({
       type: "CREATE",
       data: {
         id: dataId.current,
-        data: new Date(date).getTime(),
+        date: new Date(date).getTime(),
         content,
         emotion,
       } 
@@ -115,7 +94,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Home />} /> 
               <Route path='/new' element={<New />} />
-              <Route path='/edit' element={<Edit />} />
+              <Route path='/edit/:id' element={<Edit />} />
               <Route path='/diary/:id' element={<Diary />} />
             </Routes>
           </div>
