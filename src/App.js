@@ -41,12 +41,12 @@ function App() {
     if(localData) {
       // 내림차순 정렬
       const diaryList = JSON.parse(localData).sort((a, b) => parseInt(b.id) - parseInt(a.id));
-      // //내림차순 정렬
-      dataId.current = parseInt(diaryList[0].id) + 1
 
-      //초기값으로 설정해주는 action을 발생시켜야하므로 dispatch
-      dispatch({ type: "INIT", data: diaryList })
-      
+      if (diaryList.length >= 1) {
+        dataId.current = parseInt(diaryList[0].id) + 1
+        //초기값으로 설정해주는 action을 발생시켜야하므로 dispatch
+        dispatch({ type: "INIT", data: diaryList })
+      }
     }
   },[])
 

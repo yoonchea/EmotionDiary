@@ -14,6 +14,11 @@ const Home  = () => {
 
   const headText = `${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월` // 연도, 월을 가져오는 메서드
 
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName("title")[0];
+    titleElement.innerHTML = `Emotion Diary`
+  },[])
+
   //현재 해당하는 월에 해당하는 일기데이터들만 뽑아오기
   useEffect(() => {
     if(diaryList.length >= 1) {

@@ -32,3 +32,12 @@
     4. 최적화
       - 필요 없이 렌더링 되는 부분 최적화
       - React.memo 로 감싸기
+
+  ## 4단계 (2023. 02. 03)
+    1. 배포 전 코드 리팩토링
+    2. Title, 파비콘 변경(title 변경 시 useEffect 사용)
+    3. npm run build
+    4. firebase로 배포하기
+    5. Open Graph 설정(공유시 미리보기, description 설정)
+      - index.html에서 meta 태그로..
+    6. 최종 배포 완료 (https://jeong-emotion-diary.web.app/)
