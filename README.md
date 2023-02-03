@@ -41,3 +41,6 @@
     5. Open Graph 설정(공유시 미리보기, description 설정)
       - index.html에서 meta 태그로..
     6. 최종 배포 완료 (https://jeong-emotion-diary.web.app/)
+    7. 변경 사항 있을 시
+      1. npm run build 
+      2. firbase deploy
